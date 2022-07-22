@@ -1,5 +1,5 @@
 <p align=right>
-<a href="https://pkg.go.dev/github.com/palantir/tenablesc-client/tenable"><img src="https://pkg.go.dev/badge/github.com/palantir/tenablesc-client/tenable.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/palantir/tenablesc-client"><img src="https://pkg.go.dev/badge/github.com/palantir/tenablesc-client.svg" alt="Go Reference"></a>
 <a href="https://autorelease.general.dmz.palantir.tech/palantir/tenablesc-client"><img src="https://img.shields.io/badge/Perform%20an-Autorelease-success.svg" alt=Autorelease></a>
 </p>
 
