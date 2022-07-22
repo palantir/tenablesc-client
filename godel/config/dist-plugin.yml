@@ -1,0 +1,12 @@
+products:
+  tenablesc-client:
+    dist:
+      disters:
+        metadata:
+          type: metadata
+          config:
+            product-type: LIBRARY_V1
+    publish: {}
+product-defaults:
+  publish:
+    group-id: com.palantir.tenablesc-client
