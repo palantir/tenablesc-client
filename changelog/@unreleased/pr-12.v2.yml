@@ -1,0 +1,5 @@
+type: fix
+fix:
+  description: add tenable recurse struct tag
+  links:
+  - https://github.com/palantir/tenablesc-client/pull/12
