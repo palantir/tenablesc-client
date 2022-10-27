@@ -102,6 +102,14 @@ func (c *Client) GetScanResult(id string) (*ScanResult, error) {
 	return &resp, nil
 }
 
+func (c *Client) DeleteScanResult(id string) error {
+	if _, err := c.deleteResource(fmt.Sprintf("%s/%s", scanResultEndpoint, id), nil, nil); err != nil {
+		return fmt.Errorf("unable to delete scan result with id %s: %w", id, err)
+	}
+
+	return nil
+}
+
 func (c *Client) DownloadScanResult(id string) ([]byte, error) {
 
 	possiblyZippedStream, err := c.internalDownloadScanResult(id)
