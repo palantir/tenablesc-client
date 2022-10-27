@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: Implement the credential and scanresult delete action
+  links:
+    - https://github.com/palantir/tenablesc-client/pull/21
