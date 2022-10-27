@@ -7,7 +7,7 @@ import (
 const credentialEndpoint = "/credential"
 
 // Credential is massively pared back from the possible types in https://docs.tenable.com/tenablesc/api/Credential.htm
-// This is not wired to directly manage credentials, only to find them.
+// This is not wired to directly manage credentials, only to find and delete them.
 type Credential struct {
 	BaseInfo
 	Type      string   `json:"type"`
@@ -54,4 +54,12 @@ func (c *Client) GetCredential(id string) (*Credential, error) {
 	}
 
 	return resp, nil
+}
+
+func (c *Client) DeleteCredential(id string) error {
+	if _, err := c.deleteResource(fmt.Sprintf("%s/%s", credentialEndpoint, id), nil, nil); err != nil {
+		return fmt.Errorf("unable to delete credential with id %s: %w", id, err)
+	}
+
+	return nil
 }
