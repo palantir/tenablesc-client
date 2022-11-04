@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: Implement StopScanResult which stops the Scan Result associated with {id}.
+  links:
+    - https://github.com/palantir/tenablesc-client/pull/25
