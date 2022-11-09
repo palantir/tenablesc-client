@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: Allow SSH cert credentials to be created and modified.
+  links:
+    - https://github.com/palantir/tenablesc-client/pull/27
