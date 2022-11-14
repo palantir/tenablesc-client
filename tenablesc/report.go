@@ -9,33 +9,27 @@ const reportEndpoint = "/report"
 // Report represents request/response structure from https://docs.tenable.com/tenablesc/api/Report.htm
 type Report struct {
 	BaseInfo
-	ReportDefinitionID string `json:"reportDefinitionID"`
-	JobID              string `json:"jobID"`
-	Type               string `json:"type"`
-	Status             string `json:"status"`
-	Running            string `json:"running"`
-	ErrorDetails       string `json:"errorDetails"`
-	TotalSteps         string `json:"totalSteps"`
-	CompletedSteps     string `json:"completedSteps"`
-	StartTime          string `json:"startTime"`
-	FinishTime         string `json:"finishTime"`
-	OwnerGID           string `json:"ownerGID"`
+	ReportDefinitionID string              `json:"reportDefinitionID"`
+	JobID              string              `json:"jobID"`
+	Type               string              `json:"type"`
+	Status             string              `json:"status"`
+	Running            string              `json:"running"`
+	ErrorDetails       string              `json:"errorDetails"`
+	TotalSteps         string              `json:"totalSteps"`
+	CompletedSteps     string              `json:"completedSteps"`
+	StartTime          UnixEpochStringTime `json:"startTime"`
+	FinishTime         UnixEpochStringTime `json:"finishTime"`
+	OwnerGID           string              `json:"ownerGID"`
 	PubSites           []struct {
 		BaseInfo
 	} `json:"pubSites"`
 	Creator struct {
-		ID        string `json:"id"`
-		Username  string `json:"username"`
-		Firstname string `json:"firstname"`
-		Lastname  string `json:"lastname"`
-		UUID      string `json:"uuid"`
+		UserInfo
+		UUID string `json:"uuid"`
 	} `json:"creator"`
 	Owner struct {
-		ID        string `json:"id"`
-		Username  string `json:"username"`
-		Firstname string `json:"firstname"`
-		Lastname  string `json:"lastname"`
-		UUID      string `json:"uuid"`
+		UserInfo
+		UUID string `json:"uuid"`
 	} `json:"owner"`
 	OwnerGroup struct {
 		BaseInfo
