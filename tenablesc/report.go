@@ -20,14 +20,10 @@ type Report struct {
 	StartTime          UnixEpochStringTime `json:"startTime"`
 	FinishTime         UnixEpochStringTime `json:"finishTime"`
 	OwnerGID           string              `json:"ownerGID"`
-	PubSites           []struct {
-		BaseInfo
-	} `json:"pubSites"`
-	Creator    UserInfo `json:"creator"`
-	Owner      UserInfo `json:"owner"`
-	OwnerGroup struct {
-		BaseInfo
-	} `json:"ownerGroup"`
+	PubSites           []BaseInfo          `json:"pubSites"`
+	Creator            UserInfo            `json:"creator"`
+	Owner              UserInfo            `json:"owner"`
+	OwnerGroup         BaseInfo            `json:"ownerGroup"`
 }
 
 type allReportsResponse struct {
