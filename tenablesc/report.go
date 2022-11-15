@@ -23,14 +23,8 @@ type Report struct {
 	PubSites           []struct {
 		BaseInfo
 	} `json:"pubSites"`
-	Creator struct {
-		UserInfo
-		UUID string `json:"uuid"`
-	} `json:"creator"`
-	Owner struct {
-		UserInfo
-		UUID string `json:"uuid"`
-	} `json:"owner"`
+	Creator    UserInfo `json:"creator"`
+	Owner      UserInfo `json:"owner"`
 	OwnerGroup struct {
 		BaseInfo
 	} `json:"ownerGroup"`
