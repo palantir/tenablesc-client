@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: implement ability to start scans and fix typo around ScanningVirtualHosts
+links:
+    - https://github.com/palantir/tenablesc-client/pull/29
