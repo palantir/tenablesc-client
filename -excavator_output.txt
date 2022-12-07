@@ -1,0 +1,62 @@
+go mod operation failed. This may mean that there are legitimate dependency issues with the "go.mod" definition in the repository and the updates performed by the gomod check. This branch can be cloned locally to debug the issue.
+
+Command that caused error:
+./godelw exec -- go get -d github.com/stretchr/testify@upgrade golang.org/x/net@upgrade gopkg.in/yaml.v3@upgrade
+
+Output:
+Downloading https://github.com/palantir/godel/releases/download/v2.59.0/godel-2.59.0.tgz to /local/.godel/downloads/godel-2.59.0-396803.tgz...
+BusyBox v1.34.1 (2022-07-19 20:11:24 UTC) multi-call binary.
+
+Usage: wget [-cqS] [--spider] [-O FILE] [-o LOGFILE] [--header 'HEADER: VALUE'] [-Y on/off]
+	[-P DIR] [-U AGENT] [-T SEC] URL...
+
+Retrieve files via HTTP or FTP
+
+	--spider	Only check URL existence: $? is 0 if exists
+	-c		Continue retrieval of aborted transfer
+	-q		Quiet
+	-P DIR		Save to DIR (default .)
+	-S    		Show server response
+	-T SEC		Network read timeout is SEC seconds
+	-O FILE		Save to FILE ('-' for stdout)
+	-o LOGFILE	Log messages to FILE
+	-U STR		Use STR for User-Agent header
+	-Y on/off	Use proxy
+Connecting to github.com (140.82.114.3:443)
+Connecting to objects.githubusercontent.com (185.199.110.133:443)
+saving to '/local/.godel/downloads/godel-2.59.0-396803.tgz'
+godel-2.59.0-396803. 100% |********************************| 24.9M  0:00:00 ETA
+'/local/.godel/downloads/godel-2.59.0-396803.tgz' saved
+Getting package from https://github.com/palantir/godel-goland-plugin/releases/download/v1.10.0/goland-plugin-1.10.0-linux-amd64.tgz...
+3.82 MiB / 3.82 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/okgo/releases/download/v1.20.0/check-plugin-1.20.0-linux-amd64.tgz...
+4.47 MiB / 4.47 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-compiles/releases/download/v1.18.0/compiles-asset-1.18.0-linux-amd64.tgz...
+5.27 MiB / 5.27 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-deadcode/releases/download/v1.17.0/deadcode-asset-1.17.0-linux-amd64.tgz...
+5.29 MiB / 5.29 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-errcheck/releases/download/v1.17.0/errcheck-asset-1.17.0-linux-amd64.tgz...
+5.40 MiB / 5.40 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-golint/releases/download/v1.12.0/golint-asset-1.12.0-linux-amd64.tgz...
+5.35 MiB / 5.35 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-govet/releases/download/v1.12.0/govet-asset-1.12.0-linux-amd64.tgz...
+3.82 MiB / 3.82 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-importalias/releases/download/v1.12.0/importalias-asset-1.12.0-linux-amd64.tgz...
+4.23 MiB / 4.23 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-ineffassign/releases/download/v1.15.0/ineffassign-asset-1.15.0-linux-amd64.tgz...
+5.34 MiB / 5.34 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-outparamcheck/releases/download/v1.17.0/outparamcheck-asset-1.17.0-linux-amd64.tgz...
+5.40 MiB / 5.40 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-unconvert/releases/download/v1.18.0/unconvert-asset-1.18.0-linux-amd64.tgz...
+5.67 MiB / 5.67 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-okgo-asset-varcheck/releases/download/v1.17.0/varcheck-asset-1.17.0-linux-amd64.tgz...
+5.29 MiB / 5.29 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-license-plugin/releases/download/v1.13.0/license-plugin-1.13.0-linux-amd64.tgz...
+4.07 MiB / 4.07 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Getting package from https://github.com/palantir/godel-test-plugin/releases/download/v1.15.0/test-plugin-1.15.0-linux-amd64.tgz...
+4.58 MiB / 4.58 MiB [----------------------------------------------------------------] 100.00% ? p/s
+Error: failed to resolve 2 plugin(s):
+    failed to resolve artifact com.palantir.distgo:dist-plugin:1.39.0 using resolvers:
+    failed to resolve artifact at https://github.com/palantir/distgo/releases/download/v1.39.0/dist-plugin-1.39.0-linux-amd64.tgz: request for URL https://github.com/palantir/distgo/releases/download/v1.39.0/dist-plugin-1.39.0-linux-amd64.tgz returned status code 503
+    failed to resolve artifact com.palantir.godel-format-plugin:format-plugin:1.15.0 using resolvers:
+    failed to resolve artifact at https://github.com/palantir/godel-format-plugin/releases/download/v1.15.0/format-plugin-1.15.0-linux-amd64.tgz: request for URL https://github.com/palantir/godel-format-plugin/releases/download/v1.15.0/format-plugin-1.15.0-linux-amd64.tgz returned status code 503
