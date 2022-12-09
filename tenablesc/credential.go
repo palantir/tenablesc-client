@@ -87,6 +87,49 @@ func (c *Client) handleSSHCertCredFileUpload(key string) (string, error) {
 	return keyFile.Filename, nil
 }
 
+// DBCredentialUpload https://docs.tenable.com/tenablesc/api/Credential.htm#credential_POST
+type DBCredentialUpload struct {
+	BaseInfo
+	Tags     string `json:"tags"`
+	Type     string `json:"type"`
+	AuthType string `json:"authType"`
+	Login    string `json:"login"`
+	Password string `json:"password"`
+	SID      string `json:"sid"`
+	DBType   string `json:"dbType"`
+	Port     string `json:"port"`
+}
+
+const (
+	postgresDBType   = "PostgreSQL"
+	passwordAuthType = "password"
+	databaseType     = "database"
+)
+
+// AddPostgresDBCredential creates a new postgres db credential
+func (c *Client) AddPostgresDBCredential(credName, username, password, description, dbName, port string) (*Credential, error) {
+	newPostgresDBCredential := DBCredentialUpload{
+		BaseInfo: BaseInfo{
+			Name:        credName,
+			Description: description,
+		},
+		Type:     databaseType,
+		AuthType: passwordAuthType,
+		Login:    username,
+		Password: password,
+		SID:      dbName,
+		DBType:   postgresDBType,
+		Port:     port,
+	}
+
+	resp := &Credential{}
+	if _, err := c.postResource(credentialEndpoint, newPostgresDBCredential, resp); err != nil {
+		return nil, fmt.Errorf("failed to create postgres db credential: %w", err)
+	}
+
+	return resp, nil
+}
+
 // AddSSHCertificateCredential does the following:
 // 1. takes a public key and private key as strings and uploads those to tenable.sc
 // 2. for both private and public keys it stores the file name in PublicKey and PrivateKey in SSHCertificateCredentialUpload
