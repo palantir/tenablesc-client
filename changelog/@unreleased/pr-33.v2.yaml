@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: Allow Postgres SQL credentials to be created.
+  links:
+    - https://github.com/palantir/tenablesc-client/pull/33
