@@ -1,6 +1,7 @@
 package tenablesc
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -54,6 +55,12 @@ func (c *Client) SetBasicAuth(username, password string) *Client {
 // SetUserAgent applies a UserAgent header; if this is not supplied DefaultUserAgent is used.
 func (c *Client) SetUserAgent(agent string) *Client {
 	c.client.SetHeader(http.CanonicalHeaderKey("User-Agent"), agent)
+	return c
+}
+
+// SetTlsConfig sets client TLS configuration. Can be used to configure root CA certificates or disable certificates validation (insecure!).
+func (c *Client) SetTlsConfig(config *tls.Config) *Client {
+	c.client.SetTLSClientConfig(config)
 	return c
 }
 
