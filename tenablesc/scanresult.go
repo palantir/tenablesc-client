@@ -56,7 +56,7 @@ type ScanResult struct {
 
 type scanResultInternal struct {
 	Manageable []*ScanResult `json:"manageable" tenable:"recurse"`
-	Useable    []*ScanResult `json:"useable" tenable:"recurse"`
+	Usable     []*ScanResult `json:"usable" tenable:"recurse"`
 }
 
 // Do the usable/manageable split thing. ffff.
