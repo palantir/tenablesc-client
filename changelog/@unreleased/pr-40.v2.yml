@@ -1,0 +1,6 @@
+type: improvement
+improvement:
+  description: add newly introduced attributes State+Type for ScanPolicy's Plugin
+    Family
+  links:
+  - https://github.com/palantir/tenablesc-client/pull/40
