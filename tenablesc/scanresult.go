@@ -56,7 +56,7 @@ type ScanResult struct {
 
 type scanResultInternal struct {
 	Manageable []*ScanResult `json:"manageable" tenable:"recurse"`
-	Useable    []*ScanResult `json:"useable" tenable:"recurse"`
+	Usable     []*ScanResult `json:"usable" tenable:"recurse"`
 }
 
 // Do the usable/manageable split thing. ffff.
@@ -75,7 +75,7 @@ func (c *Client) GetAllScanResultsByTime(start, end time.Time) ([]*ScanResult, e
 		v.Add("startTime", fmt.Sprintf("%d", start.Unix()))
 	}
 	if !end.IsZero() {
-		v.Add("endTime", fmt.Sprintf("%d", start.Unix()))
+		v.Add("endTime", fmt.Sprintf("%d", end.Unix()))
 	}
 
 	resourceURL := strings.Builder{}
