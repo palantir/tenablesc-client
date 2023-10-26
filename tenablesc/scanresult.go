@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/url"
 	"strings"
 	"time"
@@ -177,7 +177,7 @@ func firstFileFromPKZipSlice(slice []byte) ([]byte, error) {
 
 	reader, err := zip.NewReader(bytes.NewReader(slice), int64(len(slice)))
 	if err != nil {
-		return nil, fmt.Errorf("nessus scan result zip could not be parsed: %w", err)
+		return nil, fmt.Errorf("failed to create zip reader: %w", err)
 	}
 
 	if len(reader.File) == 0 {
@@ -189,7 +189,7 @@ func firstFileFromPKZipSlice(slice []byte) ([]byte, error) {
 		return nil, fmt.Errorf("could not open first file in zip: %w", err)
 	}
 
-	results, err = ioutil.ReadAll(file)
+	results, err = io.ReadAll(file)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read zip file: %w", err)
 	}
