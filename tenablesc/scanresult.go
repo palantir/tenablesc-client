@@ -90,7 +90,10 @@ func (c *Client) GetAllScanResultsByTime(start, end time.Time) ([]*ScanResult, e
 		return nil, fmt.Errorf("failed to get scan results: %w", err)
 	}
 
-	return resp.Manageable, nil
+	ret := resp.Manageable
+	ret = append(ret, resp.Useable...)
+
+	return ret, nil
 }
 
 func (c *Client) GetScanResult(id string) (*ScanResult, error) {
