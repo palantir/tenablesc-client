@@ -25,7 +25,8 @@ type response struct {
 }
 
 // NewClient creates a Tenable.SC client object with defaults applied.
-//   Don't forget to SetAPIKey or SetBasicAuth to ensure you make credentialed queries.
+//
+//	Don't forget to SetAPIKey or SetBasicAuth to ensure you make credentialed queries.
 func NewClient(baseURL string) *Client {
 
 	c := resty.New().
@@ -85,7 +86,8 @@ func defaultTenableRetryConditions(resp *resty.Response, err error) bool {
 // This function inspects the provided interface for which fields should be requested.
 // All `json` field names are included in the list;
 // If the field includes `tenable:recurse` tag, then the child structure is also interrogated for
-//  additional fields to extract.
+//
+//	additional fields to extract.
 func getFieldsForStruct(d interface{}) []string {
 	t := reflect.TypeOf(d)
 
@@ -190,7 +192,8 @@ func (c *Client) deleteResource(endpoint string, input interface{}, dest interfa
 }
 
 // handleRequest implements the application-side retry and backoff logic for all queries, retrying in case of
-//  application-side errors that are clearly transient.
+//
+//	application-side errors that are clearly transient.
 func (c *Client) handleRequest(method, endpoint string, request *resty.Request, dest interface{}) (*response, error) {
 	var err error
 
@@ -248,7 +251,8 @@ func handleHTTPError(resp *resty.Response) error {
 }
 
 // handleResponse's job is to handle finishing the unmarshal, as well as
-//  wrapping the error if there's an error here.
+//
+//	wrapping the error if there's an error here.
 func handleResponse(resp *resty.Response, dest interface{}) error {
 	respErr := handleHTTPError(resp)
 

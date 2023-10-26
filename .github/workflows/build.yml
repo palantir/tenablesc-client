@@ -1,0 +1,47 @@
+name: Build
+
+on:
+  push:
+    branches: [develop]
+    tags-ignore:
+      - '**'
+
+  pull_request:
+    branches: [develop]
+
+  release:
+    types: [published]
+
+jobs:
+  Verify:
+    runs-on: ubuntu-latest
+
+    env:
+      GOPATH: /home/runner/go
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set Go version
+      id: go_version
+      run: |
+        GO_VERSION=$(cat .palantir/go-version | sed 's/^go//' )
+        echo "::set-output name=version::${GO_VERSION}"
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ steps.go_version.outputs.version }}
+
+    - name: Cache Godel assets
+      uses: actions/cache@v2
+      with:
+        path: ~/.godel
+        key: ${{ runner.os }}-godel-${{ hashFiles('godelw', 'godel/config/godel.yml') }}
+        restore-keys: |
+          ${{ runner.os }}-godel-
+
+    - name: Verify
+      run: ./godelw verify --apply=false
