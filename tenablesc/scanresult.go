@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"net/url"
-	"strings"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -67,23 +66,20 @@ func (c *Client) GetAllScanResults() ([]*ScanResult, error) {
 
 func (c *Client) GetAllScanResultsByTime(start, end time.Time) ([]*ScanResult, error) {
 
-	v := url.Values{}
-
+	params := url.Values{}
 	if !start.IsZero() {
-		v.Add("startTime", fmt.Sprintf("%d", start.Unix()))
+		params.Add("startTime", fmt.Sprintf("%d", start.Unix()))
 	}
 	if !end.IsZero() {
-		v.Add("endTime", fmt.Sprintf("%d", end.Unix()))
+		params.Add("endTime", fmt.Sprintf("%d", end.Unix()))
 	}
 
-	resourceURL := strings.Builder{}
-	resourceURL.WriteString(scanResultEndpoint)
-	if len(v) > 0 {
-		resourceURL.WriteString(fmt.Sprintf("?%s", v.Encode()))
+	resourceURL := url.URL{
+		Path:     scanResultEndpoint,
+		RawQuery: params.Encode(),
 	}
 
 	var resp scanResultInternal
-
 	if _, err := c.getResource(resourceURL.String(), &resp); err != nil {
 		return nil, fmt.Errorf("failed to get scan results: %w", err)
 	}
@@ -106,7 +102,7 @@ func (c *Client) GetAllScanResultsByTime(start, end time.Time) ([]*ScanResult, e
 }
 
 func (c *Client) GetScanResult(id string) (*ScanResult, error) {
-	resp := ScanResult{}
+	var resp ScanResult
 	if _, err := c.getResource(fmt.Sprintf("%s/%s", scanResultEndpoint, id), &resp); err != nil {
 		return nil, fmt.Errorf("failed to get scan result %s: %w", id, err)
 	}
