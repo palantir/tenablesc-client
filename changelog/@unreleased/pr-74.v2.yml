@@ -1,0 +1,5 @@
+type: fix
+fix:
+  description: Improving ScanResult functionality
+  links:
+  - https://github.com/palantir/tenablesc-client/pull/74
