@@ -56,10 +56,8 @@ type ScanResult struct {
 
 type scanResultInternal struct {
 	Manageable []*ScanResult `json:"manageable" tenable:"recurse"`
-	Useable    []*ScanResult `json:"useable" tenable:"recurse"`
+	Usable     []*ScanResult `json:"usable" tenable:"recurse"`
 }
-
-// Do the usable/manageable split thing. ffff.
 
 // takes startTime + endTime parameters, but defaults to last 30d.
 
@@ -90,7 +88,21 @@ func (c *Client) GetAllScanResultsByTime(start, end time.Time) ([]*ScanResult, e
 		return nil, fmt.Errorf("failed to get scan results: %w", err)
 	}
 
-	return resp.Manageable, nil
+	var spOut []*ScanResult
+	spMap := make(map[ProbablyString]bool)
+
+	for _, o := range resp.Usable {
+		spOut = append(spOut, o)
+		spMap[o.ID] = true
+	}
+	for _, o := range resp.Manageable {
+		if _, exists := spMap[o.ID]; !exists {
+			spOut = append(spOut, o)
+			spMap[o.ID] = true
+		}
+	}
+
+	return spOut, nil
 }
 
 func (c *Client) GetScanResult(id string) (*ScanResult, error) {
