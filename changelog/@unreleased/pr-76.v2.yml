@@ -1,0 +1,5 @@
+type: improvement
+improvement:
+  description: allow access to the underlying resty client
+  links:
+  - https://github.com/palantir/tenablesc-client/pull/76
