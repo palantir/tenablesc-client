@@ -28,13 +28,12 @@ type response struct {
 //
 //	Don't forget to SetAPIKey or SetBasicAuth to ensure you make credentialed queries.
 func NewClient(baseURL string) *Client {
-
-	c := resty.New().
+	client := resty.New().
 		SetBaseURL(baseURL).
 		SetHeader(http.CanonicalHeaderKey("User-Agent"), DefaultUserAgent).
 		AddRetryCondition(defaultTenableRetryConditions)
 
-	return &Client{*c}
+	return &Client{*client}
 }
 
 // SetAPIKey adds the API Key header to all queries with the client.
@@ -56,6 +55,12 @@ func (c *Client) SetBasicAuth(username, password string) *Client {
 func (c *Client) SetUserAgent(agent string) *Client {
 	c.client.SetHeader(http.CanonicalHeaderKey("User-Agent"), agent)
 	return c
+}
+
+// RestyClient returns a pointer to the underlying resty.Client instance.
+// This enables access to all the features and options provided by the resty library.
+func (c *Client) RestyClient() *resty.Client {
+	return &c.client
 }
 
 func defaultTenableRetryConditions(resp *resty.Response, err error) bool {
