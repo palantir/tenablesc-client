@@ -9,8 +9,6 @@ const scanPolicyEndpoint = "/policy"
 // ScanPolicy represents request/response structure from https://docs.tenable.com/tenablesc/api/Scan-Policy.htm
 type ScanPolicy struct {
 	BaseInfo
-	// to update a scan, you must pass an empty context. do not omitempty.
-	Context      string              `json:"context"`
 	Tags         string              `json:"tags,omitempty"`
 	CreatedTime  UnixEpochStringTime `json:"createdTime,omitempty"`
 	ModifiedTime UnixEpochStringTime `json:"modifiedTime,omitempty"`
