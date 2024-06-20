@@ -1,0 +1,5 @@
+type: feature
+feature:
+  description: Implement gets for /query.
+  links:
+    - https://github.com/palantir/tenablesc-client/pull/50
