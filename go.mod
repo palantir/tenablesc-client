@@ -1,6 +1,6 @@
 module github.com/palantir/tenablesc-client
 
-go 1.21
+go 1.22.0
 
 require (
 	github.com/go-resty/resty/v2 v2.7.0
