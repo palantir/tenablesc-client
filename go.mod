@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/go-resty/resty/v2 v2.16.5
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
