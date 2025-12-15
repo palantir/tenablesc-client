@@ -1,7 +1,7 @@
 # github.com/davecgh/go-spew v1.1.1
 ## explicit
 github.com/davecgh/go-spew/spew
-# github.com/go-resty/resty/v2 v2.17.0
+# github.com/go-resty/resty/v2 v2.17.1
 ## explicit; go 1.23.0
 github.com/go-resty/resty/v2
 github.com/go-resty/resty/v2/shellescape
