@@ -14,7 +14,7 @@ github.com/pmezard/go-difflib/difflib
 ## explicit; go 1.17
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/assert/yaml
-# golang.org/x/net v0.54.0
+# golang.org/x/net v0.55.0
 ## explicit; go 1.25.0
 golang.org/x/net/publicsuffix
 # gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
