@@ -2,6 +2,8 @@ module github.com/palantir/tenablesc-client
 
 go 1.26.0
 
+toolchain go1.26.3
+
 require (
 	github.com/go-resty/resty/v2 v2.17.2
 	github.com/stretchr/testify v1.11.1
