@@ -1,5 +1,0 @@
-type: feature
-feature:
-  description: Implement the /scanner/updateStatus post action
-  links:
-  - https://github.com/palantir/tenablesc-client/pull/10
