@@ -1,5 +1,0 @@
-type: improvement
-improvement:
-  description: add GetAgentScan to lookup agent scan by ID
-  links:
-  - https://github.com/palantir/tenablesc-client/pull/105

@@ -1,5 +1,0 @@
-type: feature
-feature:
-  description: Implement gets for /report and /reportDefinition.
-  links:
-    - https://github.com/palantir/tenablesc-client/pull/28
