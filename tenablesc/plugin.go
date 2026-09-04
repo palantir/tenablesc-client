@@ -11,8 +11,25 @@ const pluginEndpoint = "/plugin"
 type Plugin struct {
 	BaseInfo
 	Family              Family         `json:"family,omitempty"`
+	Synopsis            string         `json:"synopsis,omitempty"`
+	Solution            string         `json:"solution,omitempty"`
+	SeeAlso             string         `json:"seeAlso,omitempty"`
+	CPE                 string         `json:"cpe,omitempty"`
+	RiskFactor          string         `json:"riskFactor,omitempty"`
+	CVSSVector          string         `json:"cvssVector,omitempty"`
+	BaseScore           string         `json:"baseScore,omitempty"`
+	TemporalScore       string         `json:"temporalScore,omitempty"`
 	CVSSV3BaseScore     string         `json:"cvssV3BaseScore,omitempty"`
 	CVSSV3TemporalScore string         `json:"cvssV3TemporalScore,omitempty"`
+	CVSSV3Vector        string         `json:"cvssV3Vector,omitempty"`
+	VPRScore            string         `json:"vprScore,omitempty"`
+	VPRContext          string         `json:"vprContext,omitempty"`
+	EPSSScore           string         `json:"epssScore,omitempty"`
+	StigSeverity        string         `json:"stigSeverity,omitempty"`
+	ExploitAvailable    string         `json:"exploitAvailable,omitempty"`
+	ExploitEase         string         `json:"exploitEase,omitempty"`
+	ExploitFrameworks   string         `json:"exploitFrameworks,omitempty"`
+	XRefs               string         `json:"xrefs,omitempty"`
 	PluginPubDate       ProbablyString `json:"pluginPubDate,omitempty"`
 	PluginModDate       ProbablyString `json:"pluginModDate,omitempty"`
 	PatchPubDate        ProbablyString `json:"patchPubDate,omitempty"`

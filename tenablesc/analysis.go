@@ -66,6 +66,7 @@ type AnalysisResponseContainer struct {
 
 // VulnSumIPResult contains the structure used by the 'sumip' analysis tool.
 type VulnSumIPResult struct {
+	ACRScore         string         `json:"acrScore"`
 	BiosGUID         string         `json:"biosGUID"`
 	DNSName          string         `json:"dnsName"`
 	IP               string         `json:"ip"`
@@ -118,6 +119,7 @@ type VulnIPSummaryResult struct {
 // VulnDetailsResult contains the structure used by the 'vulndetails' analysis tool
 type VulnDetailsResult struct {
 	AcceptRisk          string         `json:"acceptRisk"`
+	ACRScore            string         `json:"acrScore"`
 	BaseScore           string         `json:"baseScore"`
 	BID                 string         `json:"bid"`
 	CheckType           string         `json:"checkType"`
@@ -132,6 +134,7 @@ type VulnDetailsResult struct {
 	ExploitAvailable    string         `json:"exploitAvailable"`
 	ExploitEase         string         `json:"exploitEase"`
 	ExploitFrameworks   string         `json:"exploitFrameworks"`
+	EPSSScore           string         `json:"epssScore"`
 	Family              VulnFamily     `json:"family"`
 	FirstSeen           string         `json:"firstSeen"`
 	HasBeenMitigated    string         `json:"hasBeenMitigated"`
