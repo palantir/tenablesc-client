@@ -203,7 +203,7 @@ func (c *Client) Analyze(a *Analysis, resultsContainer interface{}) (*AnalysisRe
 	if err != nil {
 		return nil, fmt.Errorf("tool '%s' unknown to api, cannot render", a.Query.Tool)
 	}
-	if reflect.PtrTo(reflect.TypeOf(requiredContainer)) != reflect.TypeOf(resultsContainer) {
+	if reflect.PointerTo(reflect.TypeOf(requiredContainer)) != reflect.TypeOf(resultsContainer) {
 		return nil, fmt.Errorf("expected output object type '%T', got '%T', cannot render", requiredContainer, resultsContainer)
 	}
 

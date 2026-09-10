@@ -100,7 +100,7 @@ func getFieldsForStruct(d interface{}) []string {
 	if typ, ok := d.(reflect.Type); ok {
 		t = typ
 	}
-	for t.Kind() == reflect.Slice || t.Kind() == reflect.Array || t.Kind() == reflect.Ptr {
+	for t.Kind() == reflect.Slice || t.Kind() == reflect.Array || t.Kind() == reflect.Pointer {
 		t = t.Elem()
 	}
 
@@ -291,13 +291,13 @@ func handleResponse(resp *resty.Response, dest interface{}) error {
 func isPTR(d interface{}) bool {
 	t := reflect.TypeOf(d)
 
-	return d == nil || t.Kind() == reflect.Ptr
+	return d == nil || t.Kind() == reflect.Pointer
 }
 
 func idFromStruct(d interface{}) (string, error) {
 	v := reflect.ValueOf(d)
 
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 
