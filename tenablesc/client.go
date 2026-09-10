@@ -93,7 +93,7 @@ func defaultTenableRetryConditions(resp *resty.Response, err error) bool {
 // If the field includes `tenable:recurse` tag, then the child structure is also interrogated for
 //
 //	additional fields to extract.
-func getFieldsForStruct(d interface{}) []string {
+func getFieldsForStruct(d any) []string {
 	t := reflect.TypeOf(d)
 
 	//if a reflect.Type is passed in directly
@@ -108,10 +108,10 @@ func getFieldsForStruct(d interface{}) []string {
 		return nil
 	}
 
-	fMap := map[string]interface{}{}
+	fMap := map[string]any{}
 
-	for i := 0; i < t.NumField(); i++ {
-		field := t.Field(i)
+	for field := range t.Fields() {
+		field := field
 
 		if f := field.Tag.Get("tenable"); strings.Contains(f, "recurse") {
 			for _, k := range getFieldsForStruct(field.Type) {
@@ -139,7 +139,7 @@ func getFieldsForStruct(d interface{}) []string {
 
 // Generalized handlers for all endpoint queries.
 
-func (c *Client) getResource(endpoint string, dest interface{}) (*response, error) {
+func (c *Client) getResource(endpoint string, dest any) (*response, error) {
 	if !isPTR(dest) {
 		return nil, errors.New("provide a pointer to the data source")
 	}
@@ -155,7 +155,7 @@ func (c *Client) getResource(endpoint string, dest interface{}) (*response, erro
 	return c.handleRequest(resty.MethodGet, endpoint, req, dest)
 }
 
-func (c *Client) postResource(endpoint string, input interface{}, dest interface{}) (*response, error) {
+func (c *Client) postResource(endpoint string, input any, dest any) (*response, error) {
 	if !isPTR(dest) {
 		return nil, errors.New("provide a pointer to the data source")
 	}
@@ -165,7 +165,7 @@ func (c *Client) postResource(endpoint string, input interface{}, dest interface
 	return c.handleRequest(resty.MethodPost, endpoint, req, dest)
 }
 
-func (c *Client) patchResource(endpoint string, input interface{}, dest interface{}) (*response, error) {
+func (c *Client) patchResource(endpoint string, input any, dest any) (*response, error) {
 	if !isPTR(dest) {
 		return nil, errors.New("provide a pointer to the data source")
 	}
@@ -175,7 +175,7 @@ func (c *Client) patchResource(endpoint string, input interface{}, dest interfac
 	return c.handleRequest(resty.MethodPatch, endpoint, req, dest)
 }
 
-func (c *Client) patchResourceWithID(endpoint string, input interface{}, dest interface{}) (*response, error) {
+func (c *Client) patchResourceWithID(endpoint string, input any, dest any) (*response, error) {
 
 	id, err := idFromStruct(input)
 	if err != nil {
@@ -186,7 +186,7 @@ func (c *Client) patchResourceWithID(endpoint string, input interface{}, dest in
 	return c.patchResource(endpoint, input, dest)
 }
 
-func (c *Client) deleteResource(endpoint string, input interface{}, dest interface{}) (*response, error) {
+func (c *Client) deleteResource(endpoint string, input any, dest any) (*response, error) {
 	if !isPTR(dest) {
 		return nil, errors.New("provide a pointer to the data source")
 	}
@@ -199,7 +199,7 @@ func (c *Client) deleteResource(endpoint string, input interface{}, dest interfa
 // handleRequest implements the application-side retry and backoff logic for all queries, retrying in case of
 //
 //	application-side errors that are clearly transient.
-func (c *Client) handleRequest(method, endpoint string, request *resty.Request, dest interface{}) (*response, error) {
+func (c *Client) handleRequest(method, endpoint string, request *resty.Request, dest any) (*response, error) {
 	var err error
 
 	if request == nil {
@@ -234,9 +234,7 @@ func handleHTTPError(resp *resty.Response) error {
 	if resp.StatusCode() < 200 || resp.StatusCode() > 299 {
 
 		httpErr := HTTPError{
-			baseError: baseError{
-				message: "unexpected response from server",
-			},
+			message:      "unexpected response from server",
 			ResponseCode: resp.StatusCode(),
 			Body:         string(resp.Body()),
 		}
@@ -258,7 +256,7 @@ func handleHTTPError(resp *resty.Response) error {
 // handleResponse's job is to handle finishing the unmarshal, as well as
 //
 //	wrapping the error if there's an error here.
-func handleResponse(resp *resty.Response, dest interface{}) error {
+func handleResponse(resp *resty.Response, dest any) error {
 	respErr := handleHTTPError(resp)
 
 	//try to unmarshal the response anyways incase there's something interesting
@@ -272,10 +270,8 @@ func handleResponse(resp *resty.Response, dest interface{}) error {
 
 	if scr.ErrorCode != 0 {
 		return SCError{
-			baseError: baseError{
-				message: scr.ErrorMsg,
-				parent:  respErr,
-			},
+			message:     scr.ErrorMsg,
+			parent:      respErr,
 			SCErrorCode: scr.ErrorCode,
 		}
 	}
@@ -288,13 +284,13 @@ func handleResponse(resp *resty.Response, dest interface{}) error {
 	return nil
 }
 
-func isPTR(d interface{}) bool {
+func isPTR(d any) bool {
 	t := reflect.TypeOf(d)
 
 	return d == nil || t.Kind() == reflect.Pointer
 }
 
-func idFromStruct(d interface{}) (string, error) {
+func idFromStruct(d any) (string, error) {
 	v := reflect.ValueOf(d)
 
 	if v.Kind() == reflect.Pointer {
