@@ -111,7 +111,6 @@ func getFieldsForStruct(d any) []string {
 	fMap := map[string]any{}
 
 	for field := range t.Fields() {
-		field := field
 
 		if f := field.Tag.Get("tenable"); strings.Contains(f, "recurse") {
 			for _, k := range getFieldsForStruct(field.Type) {
