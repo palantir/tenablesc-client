@@ -17,7 +17,7 @@ type testGetFieldsStruct struct {
 	Bare   string `json:"bare,omitempty"`
 	Nested struct {
 		OtherBare string `json:"otherBare,omitempty"`
-	} `json:"nested,omitempty" tenable:"recurse"`
+	} `json:"nested" tenable:"recurse"`
 }
 
 func TestGetFields(t *testing.T) {
