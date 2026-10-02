@@ -14,6 +14,7 @@ import (
 
 const (
 	DefaultUserAgent = "tenable.sc go client"
+	apiKeyHeader     = "x-apikey"
 )
 
 type Client struct {
@@ -31,14 +32,15 @@ func NewClient(baseURL string) *Client {
 	client := resty.New().
 		SetBaseURL(baseURL).
 		SetHeader(http.CanonicalHeaderKey("User-Agent"), DefaultUserAgent).
-		AddRetryCondition(defaultTenableRetryConditions)
+		AddRetryCondition(defaultTenableRetryConditions).
+		SetRedirectPolicy(resty.NoRedirectPolicy())
 
 	return &Client{*client}
 }
 
 // SetAPIKey adds the API Key header to all queries with the client.
 func (c *Client) SetAPIKey(access, secret string) *Client {
-	c.client.SetHeader("x-apikey",
+	c.client.SetHeader(apiKeyHeader,
 		fmt.Sprintf("accesskey=%s; secretkey=%s;",
 			access,
 			secret))
@@ -54,6 +56,18 @@ func (c *Client) SetBasicAuth(username, password string) *Client {
 // SetUserAgent applies a UserAgent header; if this is not supplied DefaultUserAgent is used.
 func (c *Client) SetUserAgent(agent string) *Client {
 	c.client.SetHeader(http.CanonicalHeaderKey("User-Agent"), agent)
+	return c
+}
+
+// SetRedirectPolicy opts the client into the supplied redirect behavior.
+// Redirects are disabled by default.
+func (c *Client) SetRedirectPolicy(policies ...resty.RedirectPolicy) *Client {
+	redirectPolicies := make([]any, len(policies))
+	for i, policy := range policies {
+		redirectPolicies[i] = policy
+	}
+
+	c.client.SetRedirectPolicy(redirectPolicies...)
 	return c
 }
 
