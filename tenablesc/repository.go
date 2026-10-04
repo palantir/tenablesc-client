@@ -82,7 +82,7 @@ func (r repoInternal) toExternal() (*Repository, error) {
 		return nil, fmt.Errorf("faild to unmarshal typeFields: %w", err)
 	}
 
-	if strings.HasPrefix(r.DataFormat, "IP") {
+	if strings.HasPrefix(r.DataFormat, "IP") || r.DataFormat == "universal" {
 		if err := json.Unmarshal(r.TypeFields, &repo.RepoIPFields); err != nil {
 			return nil, fmt.Errorf("faild to unmarshal typeFields: %w", err)
 		}
